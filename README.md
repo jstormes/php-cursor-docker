@@ -12,40 +12,79 @@ You should fork or copy from this project and make it your own.
 
 Make sure you have Docker Desktop installed and running.
 
+### Starting the Project
+
+1. Open a terminal in the project root directory
+2. Run the following command to start all services in detached mode (in the background):
+   ```bash
+   docker compose up -d
+   ```
+3. Once started, you can access:
+   - Development server: http://localhost:8088
+   - PhpMyAdmin: http://localhost:7088
+   - Production server: http://localhost:9088
+   - Database port: 5000
+
+4. To view logs when running in detached mode:
+   ```bash
+   docker compose logs -f
+   ```
+
+5. To stop the project:
+   ```bash
+   docker compose down
+   ```
+
+### Initializing Composer
+
+1. Initialize a new Composer project in the app directory:
+   ```bash
+   docker compose exec php-dev composer init
+   ```
+   Follow the prompts to set up your project. You can press Enter to accept the defaults.
+
+2. After initialization, you can install dependencies using:
+   ```bash
+   docker compose exec php-dev composer require <package-name>
+   ```
+
+3. To install all dependencies from composer.json:
+   ```bash
+   docker compose exec php-dev composer install
+   ```
+
+4. To update all dependencies to their latest versions:
+   ```bash
+   docker compose exec php-dev composer update
+   ```
+
 ### Debugging with xDebug Helper browser Extension
 
-To debug PHP from a web browser, you need to install the xDebug Helper
-Extension.
+To debug PHP from a web browser, you need to install the Xdebug Helper by JetBrains Extension.
 
-Chrome:
-[https://chromewebstore.google.com/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en](https://chromewebstore.google.com/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?hl=en)
+1. Install the Xdebug Helper extension for your browser:
+   - Chrome: [Xdebug Helper by JetBrains](https://chromewebstore.google.com/detail/xdebug-helper-by-jetbrain/aoelhdemabeimdhedkidlnbkfhnhgnhm)
+   - Edge: [Xdebug Helper by JetBrains](https://microsoftedge.microsoft.com/addons/detail/xdebug-helper-by-jetbrain/aoelhdemabeimdhedkidlnbkfhnhgnhm)
+   - Firefox: [Xdebug Helper by JetBrains](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-by-jetbrains/)
 
-Edge:
-[https://microsoftedge.microsoft.com/addons/detail/xdebug-helper/ggnngifabofaddiejjeagbaebkejomen?hl=en-US](https://microsoftedge.microsoft.com/addons/detail/xdebug-helper/ggnngifabofaddiejjeagbaebkejomen?hl=en-US)
+2. Configure the extension:
+   - Click on the extension icon in your browser toolbar
+   - Click on the gear icon (settings)
+   - Set the following values:
+     - IDE key: `DEBUG`
+     - Trace Trigger Value: `XDEBUG_TRACE`
+     - Profile Trigger Value: `XDEBUG_PROFILE`
 
-Firefox:
-[https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/)
+3. To start debugging:
+   - Open http://localhost:8088 in your browser
+   - Press `[ctrl][shift][x]` or click the bug icon in the toolbar
+   - Select `debug` from the dropdown menu
 
-Then set up the helper under Extension->Xdebug Helper `details` then `extension options`.
+4. To verify debugging is working:
+   - Set a breakpoint in your PHP code
+   - Refresh the page
+   - The code should pause at your breakpoint
 
-IDE key: `DEBUG`
-
-Trace Trigger Value: `XDEBUG_TRACE`
-
-Profile Trigger Value: `XDEBUG_PROFILE`
-
-In the browser press `[ctrl][shift][x]` or click the bug icon on the toolbar, the select `debug` to trigger debugging.
-
-
-Open the web page http://localhost:8088 in your browser.
-
-To Debug PHP code:
-
-TBD
-
-## To (re)build a production image
-
-TBD
 
 ## To access the production image locally
 
